@@ -7,17 +7,20 @@ import 'package:myecommerc/view/authentication/login.dart';
 import 'package:myecommerc/view/authentication/newpass.dart';
 import 'package:myecommerc/view/authentication/onbording/Onboarding.dart';
 import 'package:myecommerc/view/authentication/signup.dart';
+import 'package:myecommerc/view/cart.dart';
+import 'package:myecommerc/view/mainpage.dart';
 import 'package:myecommerc/view/myprofile.dart';
-import 'package:myecommerc/view/test.dart';
-import 'middelwaer/middelwear.dart';
+import 'home.dart';
 import 'middelwaer/myservices.dart';
 
  bool? isLogin ;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   var user= FirebaseAuth.instance.currentUser;
-   if(user!=null) {
+   var Auth= FirebaseAuth.instance;
+   var currentUser=Auth.currentUser!;
+
+   if(currentUser!=null) {
      isLogin = true;
    }else {
      isLogin = false;
@@ -36,13 +39,17 @@ class MyApp extends StatelessWidget {
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages:[
-        GetPage(name: '/', page:()=> const Onboarding(),middlewares: [MyMiddlewaere()]),
-        GetPage(name: '/login', page:()=>  isLogin==true? const Home() : const Login(),),
-        GetPage(name: '/home', page:()=> Home(),),
+        GetPage(name: '/', page:()=> const Onboarding(),
+            // middlewares: [MyMiddlewaere()]
+        ),
+        GetPage(name: '/login', page:()=>  isLogin ==true?const HomePage():const Login(),),
+        GetPage(name: '/home', page:()=> const HomePage(),),
+        GetPage(name: '/main', page:()=> const MainPage(),),
          GetPage(name: '/sign up', page:()=> const SignUp()),
         GetPage(name: '/forget', page:()=> const ForgetPassord()),
         GetPage(name: '/new pass', page:()=> const NewPassord()),
         GetPage(name: '/profile', page:()=> const MyProfile()),
+        GetPage(name: '/cart', page:()=> const Cart()),
       ],
     );
   }

@@ -29,51 +29,55 @@ class CustomStagGrid extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 10,),
-                  Image.asset(
+                 Image.network(
                     image,
                     height: 150,
                   ),
                   const SizedBox(
-                    height: 7,
+                    height: 2,
                   ),
                   Container(
                     alignment: Alignment.topLeft,
-                    margin: const EdgeInsets.only(left: 20),
+                    margin: const EdgeInsets.only(left: 5,top: 5),
                     child: Text(label,
                       textAlign: TextAlign.left,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w400),
+                          fontSize: 14, fontWeight: FontWeight.w400),
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   Container(
                     alignment: Alignment.topLeft,
-                    margin: const EdgeInsets.only(left: 20),
+                    margin: const EdgeInsets.only(left: 5,top: 5),
                     child: Text(description,
-                      maxLines: 2,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 15, color: Colors.grey,),
+                      style: const TextStyle(fontSize: 13, color: Colors.grey,),
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 7,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Row(
-                      children: [
-                        Text("\$"+ price,
-                          style: const TextStyle(fontSize: 15,color: Colors.black54),
-                        ),
-                        const Spacer(flex: 1),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Row(
+                        children: [
+                          Text("\$"+ price,
+                            style: const TextStyle(fontSize: 15,color: Colors.black54),
+                          ),
+                          const Spacer(flex: 1),
 
-                         IconButton(icon:const Icon( Icons.shopping_cart, size: 20),onPressed:onPress),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                      ],
+                           IconButton(icon:const Icon( Icons.shopping_cart, size: 20),onPressed:onPress),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myecommerc/coordination/colors.dart';
 
 class CustomField extends StatelessWidget {
   final String title;
@@ -31,7 +32,10 @@ class CustomField extends StatelessWidget {
         validator: valid,
         obscureText: obscuertext == null || obscuertext == false ? false : true,
         controller: mycontroller,
+        cursorColor: MyColors.primary,
         decoration: InputDecoration(
+          labelStyle: const TextStyle(color: Colors.black),
+          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(width: 1,color: MyColors.primary)),
           label: Text(
             title,
             style: const TextStyle(fontSize: 13),

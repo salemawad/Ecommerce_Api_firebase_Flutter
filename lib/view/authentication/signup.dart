@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myecommerc/controller/signup.dart';
@@ -6,7 +5,8 @@ import 'package:myecommerc/coordination/Imageassets.dart';
 import 'package:myecommerc/view/widget/customboutton.dart';
 import 'package:myecommerc/view/widget/customtextfield.dart';
 
- import '../../function/validatinput.dart';
+ import '../../coordination/colors.dart';
+import '../../function/validatinput.dart';
 import '../widget/stackprofile.dart';
 
 class SignUp extends StatelessWidget {
@@ -35,7 +35,7 @@ class SignUp extends StatelessWidget {
                 controller.addimage();
               },
               image: Image.asset(
-                  ImageTable.user,
+                  ImageAssets.user,
                 fit: BoxFit.cover,
                 width: 80,
                 height: 80,
@@ -109,7 +109,7 @@ class SignUp extends StatelessWidget {
                 },
                 child: const Text(
                   "Login",
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(color: MyColors.primary),
                 ),
               )
             ],

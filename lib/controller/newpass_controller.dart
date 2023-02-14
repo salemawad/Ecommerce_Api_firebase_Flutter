@@ -12,7 +12,6 @@ class NewPassCImp extends NewPassController{
   late TextEditingController confpass;
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
-
   @override
   void onInit() {
     pass = TextEditingController();

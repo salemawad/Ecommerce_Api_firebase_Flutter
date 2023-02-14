@@ -67,7 +67,7 @@ class Login extends StatelessWidget {
                         child: const Text(
                           "Forget Password ?",
                           style: TextStyle(fontSize: 12
-                          ,color: Colors.blue),
+                          ,color: MyColors.primary),
                         ),
                       ),
                       onTap: () {
@@ -124,7 +124,7 @@ class Login extends StatelessWidget {
                 },
                 child: const Text(
                   "Sign Up",
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(color: MyColors.primary),
                 ),
               )
             ],

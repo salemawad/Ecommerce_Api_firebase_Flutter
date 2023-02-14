@@ -44,6 +44,10 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   image_picker: ^0.8.5
   firebase_storage: ^10.2.12
+  http: ^0.13.5
+  simple_animations: ^4.2.0
+  supercharged: ^2.1.1
+  shimmer: ^2.0.0
 
 
 
@@ -71,8 +75,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/chairsItem/
-    - assets/images/tableItem/
     - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,65 +1,129 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myecommerc/controller/cartController.dart';
-import 'package:myecommerc/coordination/colors.dart';
 
 class Cart extends StatelessWidget {
-  const Cart({Key? key,}) : super(key: key);
+  const Cart({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     CartController controller = Get.put(CartController());
     return Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text("My Cart",style: TextStyle(color: Colors.black,fontSize: 20,),)),
+          centerTitle: true,
+          title: const Text(
+            "My Cart",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+            ),
+          ),
           iconTheme: const IconThemeData.fallback(),
           elevation: 0,
-          backgroundColor:MyColors.backgroundAppBar,
+          backgroundColor: Colors.white,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
-          child: FutureBuilder(
-            future: controller.collectionReference
-                .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                .get(),
-            builder: (context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-              if (snapshot.hasData) {
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.collectionReference
+                .where("uid", isEqualTo: controller.current)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
+                    double total = snapshot.data!.docs[index]["price"];
                     return Container(
+                      padding: const EdgeInsets.all(10),
+                      width: 375,
+                      height: 100,
                       margin: const EdgeInsets.all(8),
-                      color: Colors.white,
-                      child: ListTile(
-                        trailing: IconButton(onPressed:(){
-                          Get.defaultDialog(title: "Are you sure",onConfirm:()=>controller.collectionReference.doc().delete(),
-                          onCancel: (){} );
-                        } ,icon: const Icon(Icons.cancel_outlined),),
-                        title: Text(
-                          "${snapshot.data!.docs[index]["name"]}",
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.black),
-                        ),
-                        subtitle: Text("\$ ${snapshot.data!.docs[index]["price"]}"),
-                        leading: Image.asset(
-                            "${snapshot.data!.docs[index]["image"]}",
-                          width: 70,
-                          height: 70,
-                        ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade600,
+                              spreadRadius: 1,
+                              blurRadius: 15,
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(13)),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: 80,
+                            width: 80,
+                            child: Image.network(
+                              "${snapshot.data!.docs[index]["image"]}",
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 9),
+                            width: 102,
+                            height: 82,
+                            child: Column(
+                              children: [
+                                Text(
+                                  "${snapshot.data!.docs[index]["name"]}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                ),
+                                const Spacer(),
+                                Text("\$${total.toStringAsFixed(2)}",
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 30),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: const Color(0xeeeeeeee)),
+                            child: Row(children: [
+                              IconButton(
+                                  onPressed: () {
+                                    controller.plus(
+                                        snapshot.data!.docs[index].id,
+                                        snapshot.data!.docs[index]["count"],
+                                        snapshot.data!.docs[index]["price"]);
+                                  },
+                                  icon: const Icon(
+                                    Icons.add,
+                                    size: 25,
+                                  )),
+                              Text("${snapshot.data!.docs[index]['count']}"),
+                              IconButton(
+                                  onPressed: () {
+                                    controller.remove(
+                                        snapshot.data!.docs[index].id,
+                                        snapshot.data!.docs[index]["count"],
+                                        snapshot.data!.docs[index]["price"]);
+                                  },
+                                  icon: const Icon(Icons.remove, size: 25)),
+                            ]),
+                          ),
+                        ],
                       ),
                     );
                   },
                 );
               } else {
                 return const Center(
-                  child:CircularProgressIndicator()
-              ,
+                  child: Text("No product in the cart"),
                 );
               }
-            }
-    ),
+            },
+          ),
         ));
   }
 }

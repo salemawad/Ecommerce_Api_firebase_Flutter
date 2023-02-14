@@ -13,7 +13,7 @@ class StackProfile extends StatelessWidget {
           width: 120,
           height: 120,
           decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.blueAccent,
               borderRadius: BorderRadius.circular(100)),
         ),
         Padding(

@@ -36,7 +36,6 @@ class SignUpImp extends SignupController {
   signUP() async {
     await reference.putFile(file);
     imageUrl = await reference.getDownloadURL();
-    print(imageUrl);
     UserCredential credential;
     var formdata = globalKey.currentState;
     if (formdata!.validate()) {
