@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController {
+  FirebaseAuth auth=FirebaseAuth.instance;
   late File file;
   late Reference reference;
    var imageUrl;
@@ -38,16 +39,9 @@ class ProfileController extends GetxController {
   }
 
   signout()async{
-    showLoding();
-    await FirebaseAuth.instance.signOut();
-    Get.offAllNamed("/");
+    await auth.signOut();
+    Get.offAllNamed("/login");
 
   }
-// }
-@override
-  void onInit() {
 
-    // TODO: implement onInit
-    super.onInit();
-  }
 }

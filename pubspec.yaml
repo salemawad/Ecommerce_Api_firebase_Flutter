@@ -48,6 +48,7 @@ dependencies:
   simple_animations: ^4.2.0
   supercharged: ^2.1.1
   shimmer: ^2.0.0
+  awesome_dialog: ^3.0.2
 
 
 

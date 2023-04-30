@@ -44,7 +44,7 @@ class SignUpImp extends SignupController {
         showLoding();
         credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: uemail.text.trim(), password: upassword.text.trim());
-        if (credential != null) {
+
           await FirebaseFirestore.instance.collection("users").add({
             "username": username.text.trim(),
             "email": uemail.text.trim(),
@@ -52,8 +52,7 @@ class SignUpImp extends SignupController {
             "uid":FirebaseAuth.instance.currentUser!.uid
           });
           Get.offNamed("/login");
-        }
-        return credential;
+
       } on FirebaseAuthException catch (e) {
         if (e.code == "weak password") {
           print('The password weak.');

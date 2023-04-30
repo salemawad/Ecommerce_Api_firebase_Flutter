@@ -17,17 +17,15 @@ import 'middelwaer/myservices.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   var Auth= FirebaseAuth.instance;
-   var currentUser=Auth.currentUser!;
-
-   if(currentUser!=null) {
-     isLogin = true;
-   }else {
-     isLogin = false;
-   }
   MyServices myServices=Get.put(MyServices());
   await myServices.initialiservice();
   runApp(const MyApp());
+  var user = FirebaseAuth.instance.currentUser;
+  if(user != null){
+    isLogin = true;
+  }else{
+    isLogin=false;
+  }
 }
 
 class MyApp extends StatelessWidget {

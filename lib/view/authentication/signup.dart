@@ -6,6 +6,7 @@ import 'package:myecommerc/view/widget/customboutton.dart';
 import 'package:myecommerc/view/widget/customtextfield.dart';
 
  import '../../coordination/colors.dart';
+import '../../coordination/dialog.dart';
 import '../../function/validatinput.dart';
 import '../widget/stackprofile.dart';
 
@@ -74,6 +75,7 @@ class SignUp extends StatelessWidget {
                     },
                     title: "Password",
                     iconsuff: Icons.lock,
+                    obscuertext: true,
                     mycontroller: controller.upassword,
                   ),
 

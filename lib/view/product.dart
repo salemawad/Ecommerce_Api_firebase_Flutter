@@ -81,10 +81,10 @@ class Home extends StatelessWidget {
                                     onTap: () => Get.to(
                                       MyCategory(
                                         productModel: snapshot.data![index],
-                                        // categoryModel: CategoryAllList[index]
                                       ),
-                                        transition: Transition.zoom,
-                                        duration: Duration(milliseconds: 400)
+
+                                         transition: Transition.zoom,
+                                        duration: const Duration(milliseconds: 400)
                                     ),
                                     label: snapshot.data![index].title,
                                     image: snapshot.data![index].image,
@@ -117,6 +117,8 @@ class Home extends StatelessWidget {
                                           productModel: snapshot.data![index],
                                         ),
 
+                                         transition: Transition.zoom,
+                                        duration: const Duration(milliseconds: 400)
 
                                   ),
                                       label: snapshot.data![index].title,
@@ -150,6 +152,8 @@ class Home extends StatelessWidget {
                                           productModel: snapshot.data![index],
                                           // categoryModel: CategoryAllList[index]
                                         ),
+                                         transition: Transition.zoom,
+                                        duration: const Duration(milliseconds: 400)
                                       ),
                                       label: snapshot.data![index].title,
                                       image: snapshot.data![index].image,
@@ -182,6 +186,8 @@ class Home extends StatelessWidget {
                                           productModel: snapshot.data![index],
                                           // categoryModel: CategoryAllList[index]
                                         ),
+                                         transition: Transition.zoom,
+                                        duration: const Duration(milliseconds: 400)
                                       ),
                                       label: snapshot.data![index].title,
                                       image: snapshot.data![index].image,
@@ -214,6 +220,8 @@ class Home extends StatelessWidget {
                                           productModel: snapshot.data![index],
                                           // categoryModel: CategoryAllList[index]
                                         ),
+                                         transition: Transition.zoom,
+                                        duration: const Duration(milliseconds: 400)
                                       ),
                                       label: snapshot.data![index].title,
                                       image: snapshot.data![index].image,
